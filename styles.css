@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap");
+
+/* 
+fonts: 400 font-normal, 600 font-semibold, 700 font-bold
+- Red: hsl(14, 86%, 42%): #c73a0f
+- Green: hsl(159, 69%, 38%): #1ea475
+- Rose 50: hsl(20, 50%, 98%): #fcf9f7
+- Rose 100: hsl(13, 31%, 94%): #f4edeb
+- Rose 300: hsl(14, 25%, 72%): #c9aea6
+- Rose 400: hsl(7, 20%, 60%): #ad8985
+- Rose 500: hsl(12, 20%, 44%): #87635a
+- Rose 900: hsl(14, 65%, 9%): #260f08
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	transition: all 500ms ease-in-out;
+}
+
+body {
+	font-family: "Red Hat Text", sans-serif;
+	font-weight: 400;
+}

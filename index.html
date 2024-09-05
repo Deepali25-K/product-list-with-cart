@@ -10,67 +10,32 @@
   
   <title>Frontend Mentor | Product list with cart</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
-<body>
+<body class="bg-[#f4edeb] mt-[2rem] flex flex-col items-center">
 
-  Desserts
+	<!-- desserts	-->
+	<div class="bg-[] flex flex-col w-[20.5rem]">
+		<h1 class="text-[#260f08] font-bold text-[2.5rem] mb-[1rem]">Desserts</h1>
+		<div class="bg-[] flex flex-col gap-[2rem] w-[100%]">
+			<div class="bg-[] w-[]">
+				<img alt="">
+				<button class="bg-[#fcf9f7] text-[#260f08] text-[0.9rem] font-semibold w-[10rem] py-[0.65rem] border border-[#87635a] rounded-[1.5rem]">
+					<img alt="">
+					Add to Cart
+				</button>
+				<p class="text-[#c9aea6] text-[0.88rem] font-semibold">Waffle</p>
+				<p class="text-[#260f08] font-semibold">Waffle with Berries</p>
+				<p class="text-[#c73a0f] font-semibold">$6.50</p>
+			</div>
+		</div>
+	</div>
 
-  Waffle with Berries
-  Waffle
-  6.50
-  Add to Cart
+	<!-- cart	-->
+	<div class="bg-[#fcf9f7] w-[20.5rem] px-[1rem] py-[1rem] mt-[2rem] rounded-[0.5rem]">
+		<p class="text-[#c73a0f] text-[1.25rem] font-bold">Your Cart (<span>0</span>)</p>
+		<img alt="">
+		<p class="text-[#87635a] text-[0.85rem] font-semibold text-center">Your added items will appear here</p>
+	</div>
 
-  Vanilla Bean Crème Brûlée
-  Crème Brûlée
-  7.00
-  Add to Cart
-
-  Macaron Mix of Five
-  Macaron
-  8.00
-  Add to Cart
-
-  Classic Tiramisu
-  Tiramisu
-  5.50
-  Add to Cart
-
-  Pistachio Baklava
-  Baklava
-  4.00
-  Add to Cart
-
-  Lemon Meringue Pie
-  Pie
-  5.00
-  Add to Cart
-
-  Red Velvet Cake
-  Cake
-  4.50
-  Add to Cart
-
-  Salted Caramel Brownie
-  Brownie
-  4.50
-  Add to Cart
-
-  Vanilla Panna Cotta
-  Panna Cotta
-  6.50
-  Add to Cart
-
-  Your Cart (<!-- Quantity -->)
-  Your added items will appear here
-
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
 </body>
 </html>
