@@ -27,3 +27,10 @@ body {
 	font-family: "Red Hat Text", sans-serif;
 	font-weight: 400;
 }
+
+.cart-button {
+	position: relative;
+	bottom: 1.5rem;
+	left: 50%;
+	transform: translateX(-50%);
+}
