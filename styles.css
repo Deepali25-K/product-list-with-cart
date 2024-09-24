@@ -28,9 +28,14 @@ body {
 	font-weight: 400;
 }
 
-.cart-button {
+.cart-button,
+.item-quantity {
 	position: relative;
 	bottom: 1.5rem;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+.red-border {
+	border: 3px solid #c73a0f;
 }
