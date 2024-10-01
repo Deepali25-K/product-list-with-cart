@@ -51,6 +51,20 @@ decrementBtns.forEach((button, index) => {
 			cartQty.textContent = currCartQty - 1;
 		}
 		updateCart();
+
+		let itemName = items[index].textContent;
+
+		let listItem = document.querySelectorAll(".listItem");
+		let listItemQty = document.querySelectorAll(".listItemQty");
+		for (let i = 0; i < listItem.length; i++) {
+			if (itemName === listItem[i].textContent) {
+				let currListItemQty = parseInt(listItemQty[i].textContent) - 1;
+				listItemQty[i].textContent = `${currListItemQty}x`;
+				if (currListItemQty === 0) {
+					listItem[i].parentElement.parentElement.remove();
+				}
+			}
+		}
 	});
 });
 
@@ -61,6 +75,17 @@ incrementBtns.forEach((button, index) => {
 		let currCartQty = parseInt(cartQty.textContent);
 		cartQty.textContent = currCartQty + 1;
 		updateCart();
+
+		let itemName = items[index].textContent;
+
+		let listItem = document.querySelectorAll(".listItem");
+		let listItemQty = document.querySelectorAll(".listItemQty");
+		for (let i = 0; i < listItem.length; i++) {
+			if (itemName === listItem[i].textContent) {
+				let currListItemQty = parseInt(listItemQty[i].textContent) + 1;
+				listItemQty[i].textContent = `${currListItemQty}x`;
+			}
+		}
 	});
 });
 
@@ -79,6 +104,11 @@ const updateCart = () => {
 		orderTotal.classList.add("hidden");
 		cartTxt.classList.add("hidden");
 	}
+
+	// let totalPrice = document.querySelector(".totalPrice")
+	// let itemTotal = parseInt(totalPrice.textContent);
+	// let total = parseInt(orderTotal.textContent);
+	// orderTotal.textContent = total + totalPrice;
 };
 
 updateCart();
@@ -87,16 +117,29 @@ const addItemToCart = (itemName, itemPrice, currItemQty) => {
 	const item = `
 	 <div class="flex items-center justify-between border-b border-[#f4edeb] py-[1rem] rounded">
 				<div class="flex flex-col">
-					<p class="text-[#260f08] font-semibold mb-[0.2rem]">${itemName}</p>
+					<p class="listItem text-[#260f08] font-semibold mb-[0.2rem]">${itemName}</p>
 					<div class="flex gap-[0.6rem]">
-						<p class="text-[#c73a0f] font-semibold mr-[0.5rem]">${currItemQty}x</p>
+						<p class="listItemQty text-[#c73a0f] font-semibold mr-[0.5rem]">${currItemQty}x</p>
 						<p class="text-[#c9aea6]">&#64;$${itemPrice}</p>
-						<p class="text-[#c9aea6] font-semibold">$${itemPrice * currItemQty}</p>
+						<p class="totalPrice text-[#c9aea6] font-semibold">$${
+							itemPrice * currItemQty
+						}</p>
 					</div>
 				</div>
-				<img src="https://raw.githubusercontent.com/Deepali25-K/product-list-with-cart/refs/heads/main/assets/images/icon-remove-item.svg" class="border-[#c9aea6] border-[0.11rem] rounded-full py-[0.2rem] px-[0.15rem]" alt="remove-icon">
+				<img src="https://raw.githubusercontent.com/Deepali25-K/product-list-with-cart/refs/heads/main/assets/images/icon-remove-item.svg" class="deleteBtn border-[#c9aea6] border-[0.11rem] rounded-full py-[0.2rem] px-[0.15rem] cursor-pointer" alt="remove-icon">
 			</div>
 	`;
 
 	itemsContainer.innerHTML += item;
+	removeItem();
+};
+
+// adding event listener to delete buttons
+const removeItem = () => {
+	const deleteBtn = document.querySelectorAll(".deleteBtn");
+	deleteBtn.forEach((button) => {
+		button.addEventListener("click", () => {
+			button.parentElement.remove();
+		});
+	});
 };
