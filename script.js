@@ -28,6 +28,9 @@ addToCartButtons.forEach((button, index) => {
 
 		let itemName = items[index].textContent;
 		let itemPrice = parseFloat(itemPrices[index].textContent.replace(/\$/, ""));
+		let currItemPrice = parseFloat(totalAmount.textContent.replace(/\$/, ""));
+
+		totalAmount.textContent = `$${currItemPrice + itemPrice}`;
 		addItemToCart(itemName, itemPrice, currItemQty);
 
 		updateCart();
@@ -56,10 +59,16 @@ decrementBtns.forEach((button, index) => {
 
 		let listItem = document.querySelectorAll(".listItem");
 		let listItemQty = document.querySelectorAll(".listItemQty");
+		let itemPrices = document.querySelectorAll(".itemPrice");
+		let totalPrice = document.querySelectorAll(".totalPrice");
 		for (let i = 0; i < listItem.length; i++) {
 			if (itemName === listItem[i].textContent) {
 				let currListItemQty = parseInt(listItemQty[i].textContent) - 1;
+				let itemPrice = parseFloat(itemPrices[i].textContent.replace(/[@$]/g, ""));
+				let currItemPrice = parseFloat(totalAmount.textContent.replace(/\$/, ""));
 				listItemQty[i].textContent = `${currListItemQty}x`;
+				totalPrice[i].textContent = `$${itemPrice * currListItemQty}`;
+				totalAmount.textContent = `$${currItemPrice - itemPrice}`;
 				if (currListItemQty === 0) {
 					listItem[i].parentElement.parentElement.remove();
 				}
@@ -80,10 +89,17 @@ incrementBtns.forEach((button, index) => {
 
 		let listItem = document.querySelectorAll(".listItem");
 		let listItemQty = document.querySelectorAll(".listItemQty");
+		let itemPrices = document.querySelectorAll(".itemPrice");
+		let totalPrice = document.querySelectorAll(".totalPrice");
 		for (let i = 0; i < listItem.length; i++) {
 			if (itemName === listItem[i].textContent) {
 				let currListItemQty = parseInt(listItemQty[i].textContent) + 1;
+				let itemPrice = parseFloat(itemPrices[i].textContent.replace(/[@$]/g, ""));
+				let currItemPrice = parseFloat(totalAmount.textContent.replace(/\$/, ""));
 				listItemQty[i].textContent = `${currListItemQty}x`;
+				totalPrice[i].textContent = `$${itemPrice * currListItemQty}`;
+
+				totalAmount.textContent = `$${currItemPrice + itemPrice}`;
 			}
 		}
 	});
@@ -97,6 +113,7 @@ const updateCart = () => {
 		orderBtn.classList.remove("hidden");
 		orderTotal.classList.remove("hidden");
 		cartTxt.classList.remove("hidden");
+		// totalAmount.textContent = `$${0.00}`;
 	} else {
 		emptyCartTxt.classList.remove("hidden");
 		emptyCartImg.classList.remove("hidden");
@@ -104,11 +121,6 @@ const updateCart = () => {
 		orderTotal.classList.add("hidden");
 		cartTxt.classList.add("hidden");
 	}
-
-	// let totalPrice = document.querySelector(".totalPrice")
-	// let itemTotal = parseInt(totalPrice.textContent);
-	// let total = parseInt(orderTotal.textContent);
-	// orderTotal.textContent = total + totalPrice;
 };
 
 updateCart();
@@ -120,7 +132,7 @@ const addItemToCart = (itemName, itemPrice, currItemQty) => {
 					<p class="listItem text-[#260f08] font-semibold mb-[0.2rem]">${itemName}</p>
 					<div class="flex gap-[0.6rem]">
 						<p class="listItemQty text-[#c73a0f] font-semibold mr-[0.5rem]">${currItemQty}x</p>
-						<p class="text-[#c9aea6]">&#64;$${itemPrice}</p>
+						<p class="itemPrice text-[#c9aea6]">&#64;$${itemPrice}</p>
 						<p class="totalPrice text-[#c9aea6] font-semibold">$${
 							itemPrice * currItemQty
 						}</p>
@@ -137,9 +149,34 @@ const addItemToCart = (itemName, itemPrice, currItemQty) => {
 // adding event listener to delete buttons
 const removeItem = () => {
 	const deleteBtn = document.querySelectorAll(".deleteBtn");
-	deleteBtn.forEach((button) => {
+	deleteBtn.forEach((button, index) => {
 		button.addEventListener("click", () => {
+			let listItem = document.querySelector(".listItem");
+			let listItemQty = document.querySelector(".listItemQty");
+			let currCartQty = parseInt(cartQty.textContent);
+			let currListItemQty = parseInt(listItemQty.textContent);
+			let totalPrice = parseFloat(
+				document.querySelector(".totalPrice").textContent.replace(/[@$]/g, "")
+			);
+			console.log(totalPrice);
+			cartQty.textContent = currCartQty - currListItemQty;
+
+			let listItemName = listItem.textContent;
+
+			for (let i = 0; i < items.length; i++) {
+				if (listItemName === items[i].textContent) {
+					qtyTxts[i].textContent = `${1}`;
+					addToCartButtons[i].classList.remove("hidden");
+					itemQuantityBtns[i].classList.add("hidden");
+					itemImages[i].classList.remove("red-border");
+				}
+			}
+			let readTotalAmount = parseFloat(
+				totalAmount.textContent.replace(/[@$]/g, "")
+			);
+			totalAmount.textContent = `$${readTotalAmount - totalPrice}`;
 			button.parentElement.remove();
+			updateCart();
 		});
 	});
 };
